@@ -43,13 +43,13 @@ class Salesman():
         min_sum = 0 #Add the path lengths of mitigation problems
         next_route = copy.deepcopy(route_df_tmp) #DataFrame at this point is next_Keep on route
         for index in route_df_tmp.index: #Run on each line
-            min_tmp = route_df_tmp.loc[index, :].min() #Get the minimum value of a row
+            min_tmp = route_df_tmp.ix[index, :].min() #Get the minimum value of a row
             min_sum += min_tmp #Add the minimum value
-            route_df_tmp.loc[index, :] = route_df_tmp.loc[index, :] - min_tmp #Subtract the minimum value from each element in the row
+            route_df_tmp.ix[index, :] = route_df_tmp.ix[index, :] - min_tmp #Subtract the minimum value from each element in the row
         for column in route_df_tmp.columns: #Run on each column
-            min_tmp = route_df_tmp.loc[:, column].min() #Get column minimum
+            min_tmp = route_df_tmp.ix[:, column].min() #Get column minimum
             min_sum += min_tmp #Add the minimum value
-            route_df_tmp.loc[:, column] = route_df_tmp.loc[:, column] - min_tmp #Subtract the minimum value from each element in that column
+            route_df_tmp.ix[:, column] = route_df_tmp.ix[:, column] - min_tmp #Subtract the minimum value from each element in that column
         route_length += min_sum #Added to route length
         return route_length, next_route #DataFrame of the route length and the route at the time of the node
 
@@ -104,12 +104,12 @@ class Salesman():
 
     #Convert a list of routes to path
     def __displayRoutePath(self, route_list):
-        label, counter, route_path = 0, 0, [0] #label is the current position,counter is the number of moves, route_path is the route
+        label, counter, route_path = 0, 0, "0" #label is the current position,counter is the number of moves, route_path is the route
         for i in range(self.node_num): #Maximum number of iterations is number of nodes
             for route in route_list:
                 if route[0] == label and route[2] == 0: #If the starting point is label and the adopted route
                     new_label = route[1] #Label update
-                    route_path.append(new_label)
+                    route_path += " -> " + str(new_label)
                     counter += 1 #counter increment
             label = new_label
             if label == 0: #If label is 0, the round is over

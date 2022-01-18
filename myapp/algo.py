@@ -9,8 +9,12 @@ def get_bnb(df):
     print(df.dtypes)
     route_list =get_matrix_distances(df)
     #Instantiate and use method
+    print(route_list)
     salesman = Salesman(route_list)
+    print('11')
     suitable_val, suitable_route = salesman.getSuitableAns()
+    print('22')
+    print('=======>',suitable_route)
     return(suitable_route)
 
 

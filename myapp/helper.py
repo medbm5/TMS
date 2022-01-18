@@ -36,5 +36,4 @@ def get_matrix_distances(df):
     result = pd.DataFrame(squareform(distances), columns=points, index=points)
     result=result.to_numpy()
     result[np.diag_indices_from(result)] = math.inf
-
     return(result)
